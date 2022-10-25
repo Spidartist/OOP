@@ -1,0 +1,27 @@
+import javax.swing.JOptionPane;
+
+public class Bai226 {
+	public static void main(String[] args) {
+		String option = JOptionPane.showInputDialog(null,
+				"Choose equation to solve\n"
+				+ "1. The first-degree equation (linear equation) with one variable\n"
+				+ "2. The system of first-degree equations (linear system) with two variables\n"
+				+ "3. The second-degree equation with one variable");
+		int IntOption = (int)Double.parseDouble(option);
+		switch (IntOption) {
+			case 1:
+				System.out.println("Đây là số 1");
+				break;
+			case 2:
+				System.out.println("Đây là số 2");
+				break;
+			case 3:
+				System.out.println("Đây là số 3");
+				break;
+		   	default:
+		   		System.out.println("Chạy vào khối default");
+		   		break;
+       }
+		System.exit(0);
+	}
+}

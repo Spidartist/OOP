@@ -1,0 +1,39 @@
+import javax.swing.JOptionPane;
+
+public class Bai226 {
+	public static void main(String[] args) {
+		String option = JOptionPane.showInputDialog(null,
+				"Choose equation to solve\n"
+				+ "1. The first-degree equation (linear equation) with one variable\n"
+				+ "2. The system of first-degree equations (linear system) with two variables\n"
+				+ "3. The second-degree equation with one variable");
+		int IntOption = (int)Double.parseDouble(option);
+		switch (IntOption) {
+			case 1:
+				String a = JOptionPane.showInputDialog(null, "Input the a",
+						  JOptionPane.INFORMATION_MESSAGE);
+				double da = Double.parseDouble(a);
+				while (da == 0d) {
+					a = JOptionPane.showInputDialog(null, "Input the a",
+							  JOptionPane.INFORMATION_MESSAGE);
+					da = Double.parseDouble(a);
+				};
+				String b = JOptionPane.showInputDialog(null, "Input the a",
+						  JOptionPane.INFORMATION_MESSAGE);
+				double db = Double.parseDouble(b);
+				double result = -db/da;
+				JOptionPane.showMessageDialog(null, "Result x: " + Double.toString(result));
+				break;
+			case 2:
+				System.out.println("Đây là số 2");
+				break;
+			case 3:
+				System.out.println("Đây là số 3");
+				break;
+		   	default:
+		   		System.out.println("Thoat");
+		   		break;
+       }
+		System.exit(0);
+	}
+}

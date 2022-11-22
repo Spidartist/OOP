@@ -1,4 +1,3 @@
-import java.util.*;  
 
 public class Cart {
 	public static final int MAX_NUMBER_ORDERED = 20;
@@ -13,35 +12,6 @@ public class Cart {
 			System.out.println("Max number ordered!");
 		}
 	}
-	
-	public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList) {
-		for (int i=0;i<dvdList.length;i++) {
-			if (this.qtyOrdered < MAX_NUMBER_ORDERED) {
-				this.itemsOrdered[this.qtyOrdered] = dvdList[i];
-				this.qtyOrdered += 1;
-				System.out.println("Add successed!");
-			}else {
-				System.out.println("Max number ordered!");
-			}
-		}
-	}
-	
-	public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList, int nb) {
-		if (nb > dvdList.length) {
-			System.out.println("Too much number!");
-			return;
-		}
-		for (int i=0;i<nb;i++) {
-			if (this.qtyOrdered < MAX_NUMBER_ORDERED) {
-				this.itemsOrdered[this.qtyOrdered] = dvdList[i];
-				this.qtyOrdered += 1;
-				System.out.println("Add successed!");
-			}else {
-				System.out.println("Max number ordered!");
-			}
-		}
-	}
-	
 	public int findDigitalVideoDisc(DigitalVideoDisc disc) {
 		int res = -1;
 		for (int i=0;i<this.qtyOrdered;i++) {

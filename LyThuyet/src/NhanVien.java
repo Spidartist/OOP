@@ -1,15 +1,15 @@
 
 public class NhanVien {
-	private double LUONG_MAX;
+	private static double LUONG_MAX = 750d;
 	private String tenNhanVien;
-	private double luongCoBan;
-	private double heSoLuong;
-	private double tinhLuong() {
+	public double luongCoBan;
+	public double heSoLuong;
+	public double tinhLuong() {
 		double luongHienTai = this.getLuongCoBan();
 		double heSoLuong = this.getHeSoLuong();
 		return luongHienTai*heSoLuong;
 	}
-	private boolean tangLuong(double change) {
+	public boolean tangLuong(double change) {
 		double luongHienTai = this.getLuongCoBan();
 		double heSoLuong = this.getHeSoLuong();
 		double max_luong = this.getLUONG_MAX();
@@ -21,6 +21,12 @@ public class NhanVien {
 			return true;
 		}
 	}
+	
+	public void inTTin() {
+		System.out.print(getTenNhanVien());
+		System.out.print(getHeSoLuong());
+	}
+	
 	public double getLUONG_MAX() {
 		return LUONG_MAX;
 	}

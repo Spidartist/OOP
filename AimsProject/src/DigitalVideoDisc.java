@@ -5,6 +5,8 @@ public class DigitalVideoDisc {
 	private String director;
 	private int length;
 	private float cost;
+	private int id;
+	private static int nbDigitalVideoDiscs = 0;
 	
 	DigitalVideoDisc(String title){
 		this.title = title;
@@ -12,6 +14,8 @@ public class DigitalVideoDisc {
 		this.cost = 0.0f;
 		this.director = "Anonymous";
 		this.length = 0;
+		nbDigitalVideoDiscs += 1;
+		this.id = nbDigitalVideoDiscs;
 	}
 	
 	DigitalVideoDisc(String title, String category, float cost){
@@ -20,6 +24,8 @@ public class DigitalVideoDisc {
 		this.cost = cost;
 		this.director = "Anonymous";
 		this.length = 0;
+		nbDigitalVideoDiscs += 1;
+		this.id = nbDigitalVideoDiscs;
 	}
 	
 	DigitalVideoDisc(String title, String category, String director, float cost){
@@ -27,6 +33,8 @@ public class DigitalVideoDisc {
 		this.category = category;
 		this.cost = cost;
 		this.director = director;
+		nbDigitalVideoDiscs += 1;
+		this.id = nbDigitalVideoDiscs;
 	}
 
 	DigitalVideoDisc(String title, String category, String director, int length, float cost){
@@ -35,6 +43,8 @@ public class DigitalVideoDisc {
 		this.cost = cost;
 		this.director = director;
 		this.length = length;
+		nbDigitalVideoDiscs += 1;
+		this.id = nbDigitalVideoDiscs;
 	}
 	
 	public boolean equals(DigitalVideoDisc disc) {

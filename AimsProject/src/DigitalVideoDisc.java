@@ -47,6 +47,10 @@ public class DigitalVideoDisc {
 		this.id = nbDigitalVideoDiscs;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public boolean equals(DigitalVideoDisc disc) {
 		if (this.title.equals(disc.title) && this.category.equals(disc.category) &&
 			this.director.equals(disc.director) && this.length == disc.length && this.cost == disc.cost) {

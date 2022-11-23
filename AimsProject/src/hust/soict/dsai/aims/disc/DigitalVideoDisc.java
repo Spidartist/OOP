@@ -1,3 +1,4 @@
+package hust.soict.dsai.aims.disc;
 
 public class DigitalVideoDisc {
 	private String title;
@@ -8,7 +9,7 @@ public class DigitalVideoDisc {
 	private int id;
 	private static int nbDigitalVideoDiscs = 0;
 	
-	DigitalVideoDisc(String title){
+	public DigitalVideoDisc(String title){
 		this.title = title;
 		this.category = "Unknown";
 		this.cost = 0.0f;
@@ -18,7 +19,7 @@ public class DigitalVideoDisc {
 		this.id = nbDigitalVideoDiscs;
 	}
 	
-	DigitalVideoDisc(String title, String category, float cost){
+	public DigitalVideoDisc(String title, String category, float cost){
 		this.title = title;
 		this.category = category;
 		this.cost = cost;
@@ -28,7 +29,7 @@ public class DigitalVideoDisc {
 		this.id = nbDigitalVideoDiscs;
 	}
 	
-	DigitalVideoDisc(String title, String category, String director, float cost){
+	public DigitalVideoDisc(String title, String category, String director, float cost){
 		this.title = title;
 		this.category = category;
 		this.cost = cost;
@@ -37,7 +38,7 @@ public class DigitalVideoDisc {
 		this.id = nbDigitalVideoDiscs;
 	}
 
-	DigitalVideoDisc(String title, String category, String director, int length, float cost){
+	public DigitalVideoDisc(String title, String category, String director, int length, float cost){
 		this.title = title;
 		this.category = category;
 		this.cost = cost;

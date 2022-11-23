@@ -59,10 +59,21 @@ public class DigitalVideoDisc {
 		return false;
 	}
 	
+	public String toString() {
+		return "DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + Integer.toString(this.getLength()) + ": " + Float.toString(this.getCost()) + "$\n" ;
+	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
+	public boolean isMatch(String title) {
+		if (this.getTitle().contains(title)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

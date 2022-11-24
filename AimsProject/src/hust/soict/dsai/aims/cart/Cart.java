@@ -1,3 +1,7 @@
+package hust.soict.dsai.aims.cart;
+import java.util.Scanner;
+
+import hust.soict.dsai.aims.disc.DigitalVideoDisc;
 
 public class Cart {
 	public static final int MAX_NUMBER_ORDERED = 20;
@@ -45,4 +49,39 @@ public class Cart {
 		}
 		return res;
 	}
+	
+	public void printCart() {
+		System.out.println("***********************CART***********************\nOrdered Items:\n");
+		for (int i=0;i<this.qtyOrdered;i++) {
+			System.out.println(Integer.toString(this.itemsOrdered[i].getId())+". "+this.itemsOrdered[i].toString());
+		}
+		System.out.println("Total cost: " + Float.toString(this.totalCost())+"\n");
+		System.out.println("***************************************************\n");
+	}
+	
+	public void searchTitle() {
+		Scanner sc= new Scanner(System.in);    
+		System.out.print("Enter the title: ");  
+		String title = sc.nextLine(); 
+		for (int i=0;i<this.qtyOrdered;i++) {
+			if (this.itemsOrdered[i].isMatch(title)) {
+				System.out.println(this.itemsOrdered[i].toString());
+			}
+		}
+	}
+	
+	public void searchId() {
+		Scanner sc= new Scanner(System.in);   
+		System.out.print("Enter the Id: ");  
+		int id = sc.nextInt();  
+		for (int i=0;i<this.qtyOrdered;i++) {
+			if (this.itemsOrdered[i].getId() == id) {
+				System.out.println(this.itemsOrdered[i].toString());
+				break;
+			}
+		}
+		sc.close();
+	}
+	
+	
 }

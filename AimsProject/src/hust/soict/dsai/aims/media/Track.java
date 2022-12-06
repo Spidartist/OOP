@@ -19,5 +19,10 @@ public class Track {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public void play() {
+		System.out.println("Playing track: " + this.getTitle());
+		System.out.println("Track length: " + this.getLength());
+	}
 
 }

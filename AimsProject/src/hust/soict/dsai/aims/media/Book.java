@@ -3,29 +3,25 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book extends Media {
 	private static int QUANTITY = 0;
-	private int id;
-	private String title;
-	private String category;
-	private float cost;
 	private List<String> authors = new ArrayList<String>();
 	
 	public Book(String title, float cost, String category, List<String> authors) {
 		Book.QUANTITY += 1;
-		this.id = Book.QUANTITY;
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
+		this.setId(Book.QUANTITY);
+		this.setTitle(title);
+		this.setCategory(category);
+		this.setCost(cost);
 		this.authors = authors;
 	}
 	
 	public Book(String title, float cost, String category) {
 		Book.QUANTITY += 1;
-		this.id = Book.QUANTITY;
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
+		this.setId(Book.QUANTITY);
+		this.setTitle(title);
+		this.setCategory(category);
+		this.setCost(cost);
 		List<String> authors = new ArrayList<String>();
 		authors.add("Unknown");
 		this.authors = authors;
@@ -33,10 +29,10 @@ public class Book {
 	
 	public Book(String title, float cost) {
 		Book.QUANTITY += 1;
-		this.id = Book.QUANTITY;
-		this.title = title;
-		this.category = "Unknown";
-		this.cost = cost;
+		this.setId(Book.QUANTITY);
+		this.setTitle(title);
+		this.setCategory("Unknown");
+		this.setCost(cost);
 		List<String> authors = new ArrayList<String>();
 		authors.add("Unknown");
 		this.authors = authors;

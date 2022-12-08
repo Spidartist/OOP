@@ -50,6 +50,12 @@ public abstract class Media {
 	public float getCost() {
 		return cost;
 	}
-
+	
+	public boolean isMatch(String title) {
+		if (this.getTitle().contains(title)) {
+			return true;
+		}
+		return false;
+	}
 }
 	

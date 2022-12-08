@@ -41,13 +41,6 @@ public class DigitalVideoDisc extends Disc {
 		return "DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + Integer.toString(this.getLength()) + ": " + Float.toString(this.getCost()) + "$\n" ;
 	}
 	
-	public boolean isMatch(String title) {
-		if (this.getTitle().contains(title)) {
-			return true;
-		}
-		return false;
-	}
-	
 	public String getDirector() {
 		return director;
 	}

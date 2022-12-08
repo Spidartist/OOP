@@ -2,6 +2,8 @@ package hust.soict.dsai.aims.cart;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import hust.soict.dsai.aims.media.Book;
+import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
 
@@ -35,10 +37,22 @@ public class Cart {
 	public void printCart() {
 		System.out.println("***********************CART***********************\nOrdered Items:\n");
 		for (int i=0;i<this.itemsOrdered.size();i++) {
-			System.out.println(Integer.toString(this.itemsOrdered.get(i).getId())+". "+this.itemsOrdered.get(i).toString());
+			if (this.itemsOrdered.get(i) instanceof DigitalVideoDisc) {
+				DigitalVideoDisc media = (DigitalVideoDisc)this.itemsOrdered.get(i);
+				System.out.println(Integer.toString(media.getId())+". "+media.toString());
+			}
+			if (this.itemsOrdered.get(i) instanceof Book) {
+				Book media = (Book)this.itemsOrdered.get(i);
+				System.out.println(Integer.toString(media.getId())+". "+media.toString());
+			}
+			if (this.itemsOrdered.get(i) instanceof CompactDisc) {
+				CompactDisc media = (CompactDisc)this.itemsOrdered.get(i);
+				System.out.println(Integer.toString(media.getId())+". "+media.toString());
+			}
+
 		}
 		System.out.println("Total cost: " + Float.toString(this.totalCost())+"\n");
-		System.out.println("***************************************************\n");
+		System.out.println("**************************************************\n");
 	}
 	
 	public void searchTitle() {
@@ -47,9 +61,21 @@ public class Cart {
 		String title = sc.nextLine(); 
 		for (int i=0;i<this.itemsOrdered.size();i++) {
 			if (this.itemsOrdered.get(i) instanceof DigitalVideoDisc) {
-				DigitalVideoDisc dvd = (DigitalVideoDisc)this.itemsOrdered.get(i);
-				if (dvd.isMatch(title)) {
-					System.out.println(dvd.toString());
+				DigitalVideoDisc media = (DigitalVideoDisc)this.itemsOrdered.get(i);
+				if (media.isMatch(title)) {
+					System.out.println(media.toString());
+				}
+			}
+			if (this.itemsOrdered.get(i) instanceof Book) {
+				Book media = (Book)this.itemsOrdered.get(i);
+				if (media.isMatch(title)) {
+					System.out.println(media.toString());
+				}
+			}
+			if (this.itemsOrdered.get(i) instanceof CompactDisc) {
+				CompactDisc media = (CompactDisc)this.itemsOrdered.get(i);
+				if (media.isMatch(title)) {
+					System.out.println(media.toString());
 				}
 			}
 		}
@@ -64,6 +90,20 @@ public class Cart {
 				DigitalVideoDisc dvd = (DigitalVideoDisc)this.itemsOrdered.get(i);
 				if (dvd.getId() == id) {
 					System.out.println(dvd.toString());
+					break;
+				}
+			}
+			if (this.itemsOrdered.get(i) instanceof Book) {
+				Book book = (Book)this.itemsOrdered.get(i);
+				if (book.getId() == id) {
+					System.out.println(book.toString());
+					break;
+				}
+			}
+			if (this.itemsOrdered.get(i) instanceof CompactDisc) {
+				CompactDisc cd = (CompactDisc)this.itemsOrdered.get(i);
+				if (cd.getId() == id) {
+					System.out.println(cd.toString());
 					break;
 				}
 			}

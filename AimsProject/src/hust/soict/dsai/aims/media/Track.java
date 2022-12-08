@@ -37,4 +37,8 @@ public class Track {
 		}
 		return false;
 	}
+	
+	public String toString() {
+		return "Track " + this.getTitle() + " + " + this.getLength() + "\n";
+	}
 }

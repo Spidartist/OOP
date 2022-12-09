@@ -11,6 +11,12 @@ public class DigitalVideoDisc extends Disc {
 		this.setId(nbDigitalVideoDiscs);
 	}
 	
+	public DigitalVideoDisc(String title, float cost){
+		super(title, cost);
+		DigitalVideoDisc.nbDigitalVideoDiscs += 1;
+		this.setId(nbDigitalVideoDiscs);
+	}
+	
 	public DigitalVideoDisc(String title, String category, float cost){
 		super(title, category, cost);
 		DigitalVideoDisc.nbDigitalVideoDiscs += 1;
@@ -39,13 +45,6 @@ public class DigitalVideoDisc extends Disc {
 	
 	public String toString() {
 		return "DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + Integer.toString(this.getLength()) + ": " + Float.toString(this.getCost()) + "$\n" ;
-	}
-	
-	public boolean isMatch(String title) {
-		if (this.getTitle().contains(title)) {
-			return true;
-		}
-		return false;
 	}
 	
 	public String getDirector() {

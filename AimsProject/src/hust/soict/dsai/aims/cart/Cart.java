@@ -111,5 +111,11 @@ public class Cart {
 		sc.close();
 	}
 	
-	
+	public void sortCartByTitleCost() {
+		this.itemsOrdered.sort(Media.COMPARE_BY_TITLE_COST);
+	}
+
+	public void sortCartByCostTitle() {
+		this.itemsOrdered.sort(Media.COMPARE_BY_COST_TITLE);
+	}
 }

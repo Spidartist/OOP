@@ -23,8 +23,11 @@ public class CartTest {
 		cart.addMedia(dvd3);
 		
 		cart.printCart();
-		cart.searchTitle();
-		cart.searchId();
-		
+//		cart.searchTitle();
+//		cart.searchId();
+		cart.sortCartByCostTitle();
+		cart.printCart();
+		cart.sortCartByTitleCost();
+		cart.printCart();
 	}
 }

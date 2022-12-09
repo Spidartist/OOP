@@ -11,6 +11,12 @@ public class DigitalVideoDisc extends Disc {
 		this.setId(nbDigitalVideoDiscs);
 	}
 	
+	public DigitalVideoDisc(String title, float cost){
+		super(title, cost);
+		DigitalVideoDisc.nbDigitalVideoDiscs += 1;
+		this.setId(nbDigitalVideoDiscs);
+	}
+	
 	public DigitalVideoDisc(String title, String category, float cost){
 		super(title, category, cost);
 		DigitalVideoDisc.nbDigitalVideoDiscs += 1;

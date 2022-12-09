@@ -11,10 +11,18 @@ public class Cart {
 	public static final int MAX_NUMBER_ORDERED = 20;
 	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 	
+	public ArrayList<Media> getItemsOrdered() {
+		return itemsOrdered;
+	}
+
 	public void addMedia(Media media) {
 		if (this.itemsOrdered.size() < MAX_NUMBER_ORDERED) {
-			this.itemsOrdered.add(media);
-			System.out.println("Add successed!");
+			if (this.itemsOrdered.contains(media)) {
+				System.out.println("Item existed in cart!");
+			}else {
+				this.itemsOrdered.add(media);
+				System.out.println("Add successed!");
+			}
 		}else {
 			System.out.println("Max number ordered!");
 		}

@@ -38,5 +38,9 @@ public class Store {
 		System.out.println("Delete success");
 		System.out.println("Current quantity: " + this.itemsInStore.size());
 	}
+
+	public ArrayList<Media> getItemsInStore() {
+		return itemsInStore;
+	}
 	
 }

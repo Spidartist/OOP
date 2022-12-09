@@ -10,6 +10,12 @@ public class Disc extends Media {
 		this.length = 0;
 	}
 	
+	public Disc(String title, float cost){
+		super(title, cost);
+		this.director = "Anonymous";
+		this.length = 0;
+	}
+	
 	public Disc(String title, String category, float cost){
 		super(title, cost);
 		this.director = "Anonymous";

@@ -353,23 +353,29 @@ public class Aims {
 			}
 			case 2: {
 				Scanner sc10 = new Scanner(System.in);  
-				int updateChoice = sc10.nextInt();
+				int updateChoice = -1;
 				while (updateChoice != 0) {
-					System.out.println("1.Add new media/n2.Remove media");
+					System.out.println("1.Add new media\n2.Remove media");
+					updateChoice = sc10.nextInt();
 					switch (updateChoice) {
 					case 1: {
+						Scanner sc13 = new Scanner(System.in);  
 						System.out.println("Enter the title:");
-						String title = sc10.nextLine();
+						String title = sc13.nextLine();
 						System.out.println("Enter the cost:");
-						float cost = sc10.nextFloat();
+						float cost = sc13.nextFloat();
+						sc13.nextLine();
 						System.out.println("Enter the type of media(DVD, CD, Book):");
-						String type = sc10.nextLine();
-						if (type == "DVD") {
+						String type = sc13.next();
+						if (type.equals("DVD")) {
 							DigitalVideoDisc dvd = new DigitalVideoDisc(title, cost);
-						}else if (type == "CD") {
+							store.getItemsInStore().add(dvd);
+						}else if (type.equals("CD")) {
 							CompactDisc cd = new CompactDisc(title, cost);
-						}else if (type == "Book") {
+							store.getItemsInStore().add(cd);
+						}else if (type.equals("Book")) {
 							Book book = new Book(title, cost);
+							store.getItemsInStore().add(book);
 						}else {
 							System.out.println("Not that type!!!");
 						}
@@ -383,6 +389,7 @@ public class Aims {
 								Media found = media;
 								System.out.println("Remove " + found.getTitle());
 								store.getItemsInStore().remove(found);
+								break;
 							}
 						}
 						break;

@@ -1,6 +1,5 @@
 package hust.soict.dsai.aims;
 import java.util.Scanner;
-
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
@@ -55,11 +54,158 @@ public class Aims {
 		System.out.println("--------------------------------");
 		System.out.println("Please choose a number: 0-1-2-3-4-5");
 	}
-
+	
+	public static void seeTheCart(Cart anOrder, Store store) {
+		int cartChoice = -1;
+		while (cartChoice != 0) {
+			cartMenu();
+			Scanner sc3 = new Scanner(System.in);  
+			cartChoice = sc3.nextInt();
+			switch (cartChoice) {
+			case 1: {
+				int filterChoice;
+				System.out.println("1.Filter by ID\n2.Filter by title");
+				Scanner sc6 = new Scanner(System.in);  
+				filterChoice = sc6.nextInt();
+				switch (filterChoice) {
+				case 1: {
+					int id = sc6.nextInt();
+					while (id >= anOrder.getItemsOrdered().size()) {
+						System.out.println("Dont have that index!!!");
+						id = sc6.nextInt();
+					}
+					Media found = anOrder.getItemsOrdered().get(id);
+					if (found instanceof DigitalVideoDisc) {
+						DigitalVideoDisc media = (DigitalVideoDisc)found;
+						System.out.println(media.toString());
+					}
+					if (found instanceof Book) {
+						Book media = (Book)found;
+						System.out.println("Book can't play");
+					}
+					if (found instanceof CompactDisc) {
+						CompactDisc media = (CompactDisc)found;
+						System.out.println(media.toString());
+					}
+					break;
+				}
+				case 2: {
+					Scanner sc13 = new Scanner(System.in);  
+					String title = sc13.nextLine();
+					for (Media media: store.getItemsInStore()) {
+						if (media.getTitle().contains(title)) {
+							Media found = media;
+							if (found instanceof DigitalVideoDisc) {
+								DigitalVideoDisc media1 = (DigitalVideoDisc)found;
+								System.out.println(media1.toString());
+							}
+							if (found instanceof Book) {
+								Book media1 = (Book)found;
+								System.out.println(media1.toString());
+							}
+							if (found instanceof CompactDisc) {
+								CompactDisc media1 = (CompactDisc)found;
+								System.out.println(media1.toString());
+							}
+						}
+					}
+					break;
+				}
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + filterChoice);
+				}
+				break;
+			}
+			case 2: {
+				int choiceSort = -1;
+				Scanner sc7 = new Scanner(System.in);  
+				while (choiceSort != 0) {
+					System.out.println("1.Sort by title\n2.Sort by cost");
+					choiceSort = sc7.nextInt();
+					switch (choiceSort) {
+					case 1: {
+						anOrder.sortCartByTitleCost();
+						anOrder.printCart();
+						break;
+					}
+					case 2: {
+						anOrder.sortCartByCostTitle();
+						anOrder.printCart();
+						break;
+					}
+					default:
+						choiceSort = 0;
+						break;
+					}
+				}
+				break;
+			}
+			case 3: {
+				Scanner sc8 = new Scanner(System.in);  
+				String title = sc8.nextLine();
+				for (Media media: store.getItemsInStore()) {
+					if (media.getTitle().contains(title)) {
+						Media found = media;
+						System.out.println("Remove " + found.getTitle());
+						anOrder.getItemsOrdered().remove(found);
+						break;
+					}
+				}
+				break;
+			}
+			case 4: {
+				Scanner sc9 = new Scanner(System.in);  
+				String title = sc9.nextLine();
+				for (Media media: store.getItemsInStore()) {
+					if (media.getTitle().contains(title)) {
+						Media found = media;
+						if (found instanceof DigitalVideoDisc) {
+							DigitalVideoDisc media1 = (DigitalVideoDisc)found;
+							media1.play();
+						}
+						if (found instanceof Book) {
+							Book media1 = (Book)found;
+							System.out.println("Book can't play");
+						}
+						if (found instanceof CompactDisc) {
+							CompactDisc media1 = (CompactDisc)found;
+							media1.play();
+						}
+						break;
+					}
+				}
+				break;
+			}
+			case 5: {
+				System.out.println("Order success!!!");
+				anOrder.getItemsOrdered().removeAll(anOrder.getItemsOrdered());
+				break;
+			}
+			case 0: {
+				break;
+			}
+			default:{
+				cartChoice = 0;
+				break;
+			}
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
 		Store store = new Store();
 		Cart anOrder = new Cart();
+		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
+				"Animation", "Roger Aller", 87, 19.95f);
+		store.addMedia(dvd1);
+		
+		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
+		"Science Fiction", "George Lucas", 87, 24.95f);
+		store.addMedia(dvd2);
+		
+		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin",
+		"Animation", 18.99f);
+		store.addMedia(dvd3);
 		int choice = -1;
 		while (choice != 0) {
 			showMenu();
@@ -74,34 +220,39 @@ public class Aims {
 					storeChoice = sc1.nextInt();
 					switch (storeChoice) {
 					case 1: {
+						Scanner sc2 = new Scanner(System.in); 
+						String titleMedia = sc2.nextLine();
+						Media found = null;
+						for (Media media: store.getItemsInStore()) {
+							if (media.getTitle().contains(titleMedia)) {
+								found = media;
+								System.out.println(media.toString());
+								break;
+							}
+						}
 						int detailChoice = -1;
 						while (detailChoice != 0) {
-							Scanner sc2 = new Scanner(System.in); 
-							String titleMedia = sc2.nextLine();
-							Media found = null;
-							for (Media media: store.getItemsInStore()) {
-								if (media.getTitle().contains(titleMedia)) {
-									found = media;
-									System.out.println(media.toString());
-									break;
-								}
-							}
 							mediaDetailsMenu(); 
-							detailChoice = sc2.nextInt();
+							Scanner sc11 = new Scanner(System.in);  
+							detailChoice = sc11.nextInt();
 							switch (detailChoice) {
 							case 1: {
 								if (found instanceof DigitalVideoDisc) {
 									DigitalVideoDisc media = (DigitalVideoDisc)found;
+									anOrder.getItemsOrdered().add(media);
 									System.out.println("Add success DVD");
 								}
 								if (found instanceof Book) {
 									Book media = (Book)found;
+									anOrder.getItemsOrdered().add(media);
 									System.out.println("Add success Book");
 								}
 								if (found instanceof CompactDisc) {
 									CompactDisc media = (CompactDisc)found;
+									anOrder.getItemsOrdered().add(media);
 									System.out.println("Add success CD");
 								}
+								detailChoice = 0;
 								break;
 							}
 							case 2: {
@@ -120,6 +271,7 @@ public class Aims {
 								break;
 							}
 							case 0: {
+								detailChoice = 0;
 								break;
 							}
 							default:
@@ -142,14 +294,17 @@ public class Aims {
 						}
 						if (found instanceof DigitalVideoDisc) {
 							DigitalVideoDisc media = (DigitalVideoDisc)found;
+							anOrder.getItemsOrdered().add(media);
 							System.out.println("Add success DVD");
 						}
 						if (found instanceof Book) {
 							Book media = (Book)found;
+							anOrder.getItemsOrdered().add(media);
 							System.out.println("Add success Book");
 						}
 						if (found instanceof CompactDisc) {
 							CompactDisc media = (CompactDisc)found;
+							anOrder.getItemsOrdered().add(media);
 							System.out.println("Add success CD");
 						}
 						break;
@@ -158,12 +313,15 @@ public class Aims {
 						Scanner sc5 = new Scanner(System.in); 
 						String titleMedia = sc5.nextLine();
 						Media found = null;
-						for (Media media: store.getItemsInStore()) {
+						for (Media media: anOrder.getItemsOrdered()) {
 							if (media.getTitle().contains(titleMedia)) {
 								found = media;
 								System.out.println(media.toString());
 								break;
 							}
+						}
+						if (found == null) {
+							System.out.println("Not found!!!");
 						}
 						if (found instanceof DigitalVideoDisc) {
 							DigitalVideoDisc media = (DigitalVideoDisc)found;
@@ -180,130 +338,7 @@ public class Aims {
 						break;
 					}
 					case 4: {
-						int cartChoice = -1;
-						while (cartChoice != 0) {
-							cartMenu();
-							Scanner sc3 = new Scanner(System.in);  
-							cartChoice = sc3.nextInt();
-							switch (cartChoice) {
-							case 1: {
-								int filterChoice;
-								System.out.println("1.Filter by ID\n2.Filter by title");
-								Scanner sc6 = new Scanner(System.in);  
-								filterChoice = sc6.nextInt();
-								if (filterChoice == 1) {
-									int id = sc6.nextInt();
-									Media found = anOrder.getItemsOrdered().get(id);
-									if (found instanceof DigitalVideoDisc) {
-										DigitalVideoDisc media = (DigitalVideoDisc)found;
-										System.out.println(media.toString());
-									}
-									if (found instanceof Book) {
-										Book media = (Book)found;
-										System.out.println("Book can't play");
-									}
-									if (found instanceof CompactDisc) {
-										CompactDisc media = (CompactDisc)found;
-										System.out.println(media.toString());
-									}
-								}else if (filterChoice == 2) {
-									String title = sc6.nextLine();
-									for (Media media: store.getItemsInStore()) {
-										if (media.getTitle().contains(title)) {
-											Media found = media;
-											if (found instanceof DigitalVideoDisc) {
-												DigitalVideoDisc media1 = (DigitalVideoDisc)found;
-												System.out.println(media1.toString());
-											}
-											if (found instanceof Book) {
-												Book media1 = (Book)found;
-												System.out.println(media1.toString());
-											}
-											if (found instanceof CompactDisc) {
-												CompactDisc media1 = (CompactDisc)found;
-												System.out.println(media1.toString());
-											}
-										}
-									}
-								}else {
-									System.out.println("Error!!!");
-								}
-								break;
-							}
-							case 2: {
-								int choiceSort = -1;
-								System.out.println("1.Sort by title\n2.Sort by cost");
-								Scanner sc7 = new Scanner(System.in);  
-								choiceSort = sc7.nextInt();
-								while (choiceSort != 0) {
-									switch (choiceSort) {
-									case 1: {
-										anOrder.sortCartByTitleCost();
-										anOrder.printCart();
-										break;
-									}
-									case 2: {
-										anOrder.sortCartByCostTitle();
-										anOrder.printCart();
-										break;
-									}
-									default:
-										choiceSort = 0;
-										break;
-									}
-								}
-								break;
-							}
-							case 3: {
-								Scanner sc8 = new Scanner(System.in);  
-								String title = sc8.nextLine();
-								for (Media media: store.getItemsInStore()) {
-									if (media.getTitle().contains(title)) {
-										Media found = media;
-										System.out.println("Remove " + found.getTitle());
-										anOrder.getItemsOrdered().remove(found);
-										break;
-									}
-								}
-								break;
-							}
-							case 4: {
-								Scanner sc9 = new Scanner(System.in);  
-								String title = sc9.nextLine();
-								for (Media media: store.getItemsInStore()) {
-									if (media.getTitle().contains(title)) {
-										Media found = media;
-										if (found instanceof DigitalVideoDisc) {
-											DigitalVideoDisc media1 = (DigitalVideoDisc)found;
-											media1.play();
-										}
-										if (found instanceof Book) {
-											Book media1 = (Book)found;
-											System.out.println("Book can't play");
-										}
-										if (found instanceof CompactDisc) {
-											CompactDisc media1 = (CompactDisc)found;
-											media1.play();
-										}
-										break;
-									}
-								}
-								break;
-							}
-							case 5: {
-								System.out.println("Order success!!!");
-								anOrder.getItemsOrdered().removeAll(anOrder.getItemsOrdered());
-								break;
-							}
-							case 0: {
-								break;
-							}
-							default:{
-								cartChoice = 0;
-								break;
-							}
-							}
-						}
+						seeTheCart(anOrder, store);
 						break;
 					}
 					case 0: {
@@ -360,130 +395,7 @@ public class Aims {
 				break;
 			}
 			case 3: {
-				int cartChoice = -1;
-				while (cartChoice != 0) {
-					cartMenu();
-					Scanner sc3 = new Scanner(System.in);  
-					cartChoice = sc3.nextInt();
-					switch (cartChoice) {
-					case 1: {
-						int filterChoice;
-						System.out.println("1.Filter by ID\n2.Filter by title");
-						Scanner sc6 = new Scanner(System.in);  
-						filterChoice = sc6.nextInt();
-						if (filterChoice == 1) {
-							int id = sc6.nextInt();
-							Media found = anOrder.getItemsOrdered().get(id);
-							if (found instanceof DigitalVideoDisc) {
-								DigitalVideoDisc media = (DigitalVideoDisc)found;
-								System.out.println(media.toString());
-							}
-							if (found instanceof Book) {
-								Book media = (Book)found;
-								System.out.println("Book can't play");
-							}
-							if (found instanceof CompactDisc) {
-								CompactDisc media = (CompactDisc)found;
-								System.out.println(media.toString());
-							}
-						}else if (filterChoice == 2) {
-							String title = sc6.nextLine();
-							for (Media media: store.getItemsInStore()) {
-								if (media.getTitle().contains(title)) {
-									Media found = media;
-									if (found instanceof DigitalVideoDisc) {
-										DigitalVideoDisc media1 = (DigitalVideoDisc)found;
-										System.out.println(media1.toString());
-									}
-									if (found instanceof Book) {
-										Book media1 = (Book)found;
-										System.out.println(media1.toString());
-									}
-									if (found instanceof CompactDisc) {
-										CompactDisc media1 = (CompactDisc)found;
-										System.out.println(media1.toString());
-									}
-								}
-							}
-						}else {
-							System.out.println("Error!!!");
-						}
-						break;
-					}
-					case 2: {
-						int choiceSort = -1;
-						System.out.println("1.Sort by title\n2.Sort by cost");
-						Scanner sc7 = new Scanner(System.in);  
-						choiceSort = sc7.nextInt();
-						while (choiceSort != 0) {
-							switch (choiceSort) {
-							case 1: {
-								anOrder.sortCartByTitleCost();
-								anOrder.printCart();
-								break;
-							}
-							case 2: {
-								anOrder.sortCartByCostTitle();
-								anOrder.printCart();
-								break;
-							}
-							default:
-								choiceSort = 0;
-								break;
-							}
-						}
-						break;
-					}
-					case 3: {
-						Scanner sc8 = new Scanner(System.in);  
-						String title = sc8.nextLine();
-						for (Media media: store.getItemsInStore()) {
-							if (media.getTitle().contains(title)) {
-								Media found = media;
-								System.out.println("Remove " + found.getTitle());
-								anOrder.getItemsOrdered().remove(found);
-								break;
-							}
-						}
-						break;
-					}
-					case 4: {
-						Scanner sc9 = new Scanner(System.in);  
-						String title = sc9.nextLine();
-						for (Media media: store.getItemsInStore()) {
-							if (media.getTitle().contains(title)) {
-								Media found = media;
-								if (found instanceof DigitalVideoDisc) {
-									DigitalVideoDisc media1 = (DigitalVideoDisc)found;
-									media1.play();
-								}
-								if (found instanceof Book) {
-									Book media1 = (Book)found;
-									System.out.println("Book can't play");
-								}
-								if (found instanceof CompactDisc) {
-									CompactDisc media1 = (CompactDisc)found;
-									media1.play();
-								}
-								break;
-							}
-						}
-						break;
-					}
-					case 5: {
-						System.out.println("Order success!!!");
-						anOrder.getItemsOrdered().removeAll(anOrder.getItemsOrdered());
-						break;
-					}
-					case 0: {
-						break;
-					}
-					default:{
-						cartChoice = 0;
-						break;
-					}
-					}
-				}
+				seeTheCart(anOrder, store);
 				break;
 			}
 			case 0: {

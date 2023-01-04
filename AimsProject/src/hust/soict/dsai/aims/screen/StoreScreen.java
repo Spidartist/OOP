@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -24,8 +26,8 @@ import hust.soict.dsai.aims.store.Store;
 import hust.soict.dsai.aims.cart.Cart;
 
 public class StoreScreen extends JFrame {
-	private static Store store;
-	private static Cart cart = new Cart();
+	private Store store;
+	private Cart cart;
 	JMenuBar createMenuBar() {
 		JMenu menu = new JMenu("Option");
 		
@@ -53,14 +55,23 @@ public class StoreScreen extends JFrame {
 		title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
 		title.setForeground(Color.CYAN);
 		
-		JButton cart = new JButton("View cart");
-		cart.setPreferredSize(new Dimension(100, 50));
-		cart.setMaximumSize(new Dimension(100, 50));
+		JButton btnCart = new JButton("View cart");
+		
+		btnCart.setPreferredSize(new Dimension(100, 50));
+		btnCart.setMaximumSize(new Dimension(100, 50));
+		btnCart.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Change!");
+					new AppLauncher();
+				}
+		});
+		
 		
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
 		header.add(title);
 		header.add(Box.createHorizontalGlue());
-		header.add(cart);
+		header.add(btnCart);
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
 		
 		return header;
@@ -81,15 +92,16 @@ public class StoreScreen extends JFrame {
 		
 		ArrayList<Media> mediaInStore = store.getItemsInStore();
 		for (int i=0; i< 9; i++) {
-			MediaStore cell = new MediaStore(mediaInStore.get(i), StoreScreen.cart);
+			MediaStore cell = new MediaStore(mediaInStore.get(i), cart);
 			center.add(cell);
 		}
 		
 		return center;
 	}
 	
-	public StoreScreen(Store store) {
+	public StoreScreen(Store store, Cart cart) {
 		this.store = store;
+		this.cart = cart;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
@@ -104,6 +116,8 @@ public class StoreScreen extends JFrame {
 	
 	public static void main(String[] args) {
 		Store store = new Store();
+		Cart cart = new Cart();
+	
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
 				"Animation", "Roger Aller", 87, 19.95f);
 		System.out.println(dvd1.getId());
@@ -149,7 +163,7 @@ public class StoreScreen extends JFrame {
 		System.out.println(dvd9.getId());
 		store.addMedia(dvd9);
 		
-		new StoreScreen(store);
+		new StoreScreen(store, cart);
 	}
 
 }

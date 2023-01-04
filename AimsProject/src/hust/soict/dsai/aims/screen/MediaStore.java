@@ -60,7 +60,7 @@ public class MediaStore extends JPanel {
 			        mainGui.add(new JLabel("Playing....."), BorderLayout.CENTER);
 			        JPanel buttonPanel = new JPanel(new FlowLayout());
 			        mainGui.add(buttonPanel, BorderLayout.SOUTH);
-			        JButton close = new JButton("Replay");
+			        JButton close = new JButton("Stop");
 			        close.addActionListener(ev->playDialog.setVisible(false));
 			        buttonPanel.add(close);
 			        playDialog.setContentPane(mainGui);

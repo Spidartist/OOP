@@ -61,7 +61,6 @@ public class NumberGrid extends JFrame{
 			panelButtons.add(btnNumbers[i]);
 			btnNumbers[i].addActionListener(btnListener);
 		}
-		
 		btnDelete = new JButton("DEL");
 		panelButtons.add(btnDelete);
 		btnDelete.addActionListener(btnListener);

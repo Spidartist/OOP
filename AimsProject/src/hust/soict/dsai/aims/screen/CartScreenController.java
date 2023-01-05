@@ -1,5 +1,6 @@
 package hust.soict.dsai.aims.screen;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
@@ -118,10 +120,16 @@ public class CartScreenController {
     
     @FXML
     void btnOrderPressed(ActionEvent event) {
-    	System.out.println("Order");
+		System.out.println("Order");
     	btnOrder.setText("Success!!!");
     	btnOrder.setDisable(true);
     	cart.getItemsOrdered().removeAll(cart.getItemsOrdered());
     	totalCost.setText("0.0$");	
+    	PauseTransition pt = new PauseTransition(Duration.seconds(1));
+        pt.setOnFinished(e ->{
+        	btnOrder.setDisable(false);
+        	btnOrder.setText("Order");
+        } );
+        pt.playFromStart();
     }
 }

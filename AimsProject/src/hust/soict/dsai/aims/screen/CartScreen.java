@@ -36,6 +36,7 @@ public class CartScreen extends JFrame{
 		
 		this.setTitle("Cart");
 		this.setVisible(true);
+		this.setExtendedState(MAXIMIZED_BOTH);
 		Platform.runLater(new Runnable() {
 			
 			@Override

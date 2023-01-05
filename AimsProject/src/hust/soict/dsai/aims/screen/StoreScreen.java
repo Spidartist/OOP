@@ -47,7 +47,7 @@ public class StoreScreen extends JFrame {
 		return menuBar;
 	}
 	
-	JPanel createHeader() {
+	JPanel createHeader(String[] args) {
 		JPanel header = new JPanel();
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		
@@ -63,7 +63,7 @@ public class StoreScreen extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("Change!");
-					new AppLauncher();
+					new CartScreen(cart);
 				}
 		});
 		
@@ -77,11 +77,11 @@ public class StoreScreen extends JFrame {
 		return header;
 	}
 	
-	JPanel createNorth() {
+	JPanel createNorth(String[] args) {
 		JPanel north = new JPanel();
 		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
 		north.add(createMenuBar());
-		north.add(createHeader());
+		north.add(createHeader(args));
 		return north;
 	}
 	
@@ -99,13 +99,13 @@ public class StoreScreen extends JFrame {
 		return center;
 	}
 	
-	public StoreScreen(Store store, Cart cart) {
+	public StoreScreen(String[] args, Store store, Cart cart) {
 		this.store = store;
 		this.cart = cart;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
-		cp.add(createNorth(), BorderLayout.NORTH);
+		cp.add(createNorth(args), BorderLayout.NORTH);
 		cp.add(createCenter(), BorderLayout.CENTER);
 		
 		setVisible(true);
@@ -123,7 +123,7 @@ public class StoreScreen extends JFrame {
 		System.out.println(dvd1.getId());
 		store.addMedia(dvd1);
 		
-		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
+		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars II",
 		"Science Fiction", "George Lucas", 87, 24.95f);
 		System.out.println(dvd2.getId());
 		store.addMedia(dvd2);
@@ -163,7 +163,7 @@ public class StoreScreen extends JFrame {
 		System.out.println(dvd9.getId());
 		store.addMedia(dvd9);
 		
-		new StoreScreen(store, cart);
+		new StoreScreen(args, store, cart);
 	}
 
 }

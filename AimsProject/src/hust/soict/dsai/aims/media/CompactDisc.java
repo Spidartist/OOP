@@ -11,6 +11,10 @@ public class CompactDisc extends Disc implements Playable{
 		super(title, cost);
 	}
 	
+	public CompactDisc(String title, String category, float cost){
+		super(title, category, cost);
+	}
+	
 	public CompactDisc(String title, String category, String director, int length, float cost){
 		super(title, category, director, length, cost);
 	}
